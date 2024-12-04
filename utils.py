@@ -9,7 +9,7 @@ import numpy as np
 import constants
 
 
-def visualize_random_images(data, n = 5):
+def visualize_random_images(data, n = 5, colormap = False):
     max_images = data.shape[0]
     n = min(n, max_images)
 
@@ -22,7 +22,11 @@ def visualize_random_images(data, n = 5):
 
     for i, img in enumerate(selected_images):
         plt.subplot(num_rows, 5, i + 1)
-        plt.imshow(img, cmap='gray')
+        if colormap:
+            img = apply_colormap(img)
+            plt.imshow(img)
+        else:
+            plt.imshow(img, cmap = 'gray')
         plt.axis('off')
         plt.title(f"Image {indices[i]}")
     plt.show()
